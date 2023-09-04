@@ -33,3 +33,36 @@ def main():
 
 if __name__ == "__main__":
     main()
+import json
+
+# ...
+
+def add_favorite(city, favorite_file="favorites.json"):
+    try:
+        with open(favorite_file, "r") as f:
+            favorites = json.load(f)
+    except FileNotFoundError:
+        favorites = []
+
+    if city not in favorites:
+        favorites.append(city)
+
+    with open(favorite_file, "w") as f:
+        json.dump(favorites, f)
+
+def view_favorites(favorite_file="favorites.json"):
+    try:
+        with open(favorite_file, "r") as f:
+            favorites = json.load(f)
+            print("Favorite Cities:")
+            for city in favorites:
+                print(city)
+    except FileNotFoundError:
+        print("No favorite cities yet.")
+
+# Modify the argparse section to handle favorite city commands
+# ...
+
+if __name__ == "__main__":
+    main()
+
